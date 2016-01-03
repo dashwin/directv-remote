@@ -256,6 +256,60 @@ module.exports.Remote = function(ipAddr) {
 
         makeRequest(options, callbackHandler(callback));
     };
+    
+    //dvr playlist
+    this.getPlayList = function(clientAddr, callback){
+         var path = '/dvr/playlist';
+
+        var options = {
+            hostname: this.IP_ADDRESS,
+            port: 8080,
+            path: path + '?action=get'
+        };
+
+        if (typeof clientAddr !== 'undefined') {
+            options.path = buildQueryString(options.path, { clientAddr: clientAddr });
+        }
+
+        makeRequest(options, callbackHandler(callback));
+    }
+    
+    //dvr play item
+    this.play = function(uniqueId, callback){
+        var path = '/dvr/play';
+        
+        var options = {
+            hostname: this.IP_ADDRESS,
+            port: 8080,
+            path: path + '?uniqueId=' + uniqueId
+        };
+        makeRequest(options, callbackHandler(callback));
+    }
+    
+    //launch a webpage
+    this.webStart = function(url,callback){
+        var path = '/itv/startURL';
+        
+        var options = {
+            hostname: this.IP_ADDRESS,
+            port: 8080,
+            path: path + '?url=' + encodeURI(url)
+        };
+        
+        makeRequest(options, callbackHandler(callback));
+    }
+    
+    //kill a webpage
+    this.webStop = function(url,callback){
+        var options = {
+            hostname: this.IP_ADDRESS,
+            port: 8080,
+            path: 'itv/stopITV'
+        };
+        
+        makeRequest(options, callbackHandler(callback));
+    }
+    
 
     // This is a utility function that allows the same optional callback for all of the separate Remote functions
     var callbackHandler = function(callback) {

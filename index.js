@@ -259,7 +259,7 @@ module.exports.Remote = function(ipAddr) {
     
     //dvr playlist
     this.getPlayList = function(clientAddr, callback){
-         var path = '/dvr/playlist';
+         var path = '/dvr/playList';
 
         var options = {
             hostname: this.IP_ADDRESS,
@@ -304,7 +304,7 @@ module.exports.Remote = function(ipAddr) {
         var options = {
             hostname: this.IP_ADDRESS,
             port: 8080,
-            path: 'itv/stopITV'
+            path: '/itv/stopITV'
         };
         
         makeRequest(options, callbackHandler(callback));
